@@ -75,4 +75,15 @@ export class ComidasComponent implements OnInit {
       tipo: 'comida'
     });
   }
+
+  obtenerIngredientes(comida: any): string[] {
+    const ingredientes: string[] = [];
+    
+    for (let i = 1; i <= 20; i++) {
+      const ingrediente = comida[`strIngredient${i}`];
+      if (ingrediente && ingrediente.trim() !== '') {
+        ingredientes.push(ingrediente.trim());
+      }}
+    return ingredientes;
+  }
 }

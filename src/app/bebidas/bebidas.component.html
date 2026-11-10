@@ -72,33 +72,26 @@
         </div>
 
         <!-- tarjetas -->
-        <div class="card-body d-flex flex-column justify-content-between p-4">
-          <div>
-            <div class="d-flex justify-content-between align-items-baseline mb-2">
-              <h4 class="card-title text-white fw-bold mb-0" style="font-size: 1.25rem;">{{ bebida.strDrink }}</h4>
-              <span class="text-wood-amber fw-bold precio-tag">${{ bebida.precio | number }}</span>
-            </div>
-            
-            <p class="card-text text-wood-muted small mb-3">Exquisita mezcla artesanal con los más altos estándares de calidad de la casa.</p>
-            
-            <!-- etiquetas -->
-            <div class="mb-3">
-              <span class="text-wood-muted d-block mb-1" style="font-size: 0.75rem; letter-spacing: 0.5px;"><i class="bi bi-info-circle"></i> ESPECIFICACIÓN:</span>
-              <div class="d-flex flex-wrap gap-1">
-                <span class="badge badge-ingrediente">{{ bebida.strCategory || 'Coctelería' }}</span>
-                <span class="badge badge-ingrediente">{{ bebida.strAlcoholic || 'Selección' }}</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- agregar -->
-          <button class="btn btn-wood-glow w-100 py-2 rounded-3 d-flex align-items-center justify-content-center gap-2 mt-3" 
-                  (click)="agregarAlPedido(bebida)">
-            <i class="bi bi-cart-plus"></i> Agregar al pedido</button>
-        </div>
+<div class="card-body d-flex flex-column justify-content-between p-4">
+  <div>
+    <div class="d-flex justify-content-between align-items-baseline mb-2">
+      <h4 class="card-title text-white fw-bold mb-0" style="font-size: 1.25rem;">{{ bebida.strDrink }}</h4>
+      <span class="text-wood-amber fw-bold precio-tag">${{ bebida.precio | number }}</span>
+    </div>
+    
+    <!-- ingredientes -->
+    <div class="mb-3">
+      <span class="text-wood-muted d-block mb-1" style="font-size: 0.75rem; letter-spacing: 0.5px;"><i class="bi bi-list-check"></i> ingredientes:</span>
+      <div class="d-flex flex-wrap gap-1">
+        <span *ngFor="let ing of obtenerIngredientes(bebida)" class="badge badge-ingrediente">{{ ing }}</span>
       </div>
     </div>
-  </div>
+
+  <!-- agregar -->
+  <button class="btn btn-wood-glow w-100 py-2 rounded-3 d-flex align-items-center justify-content-center gap-2 mt-3" 
+          (click)="agregarAlPedido(bebida)">
+    <i class="bi bi-cart-plus"></i> Agregar al pedido</button>
+</div>
 
   <!-- vacio -->
   <div *ngIf="lista.length === 0" class="text-center text-wood-muted my-5 py-5">

@@ -98,4 +98,15 @@ export class BebidasComponent implements OnInit {
       tipo: 'bebida'
     });
   }
+
+  obtenerIngredientes(bebida: any): string[] {
+    const ingredientes: string[] = [];
+    
+    for (let i = 1; i <= 20; i++) {
+      const ingrediente = bebida[`strIngredient${i}`];
+      if (ingrediente && ingrediente.trim() !== '') {
+        ingredientes.push(ingrediente.trim());
+      }}
+    return ingredientes;
+  }
 }
