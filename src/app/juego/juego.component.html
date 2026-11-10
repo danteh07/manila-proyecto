@@ -1,0 +1,57 @@
+<div class="juego-container py-5 bg-dark-theme text-light min-vh-100">
+  <div class="container text-center" style="max-width: 650px;">
+
+    <!-- encabezado -->
+    <div class="mb-4">
+      <span class="badge badge-wood px-3 py-2 mb-2">Minijuego Manila</span>
+      <h1 class="display-6 fw-bold text-white font-serif">Encuentra el Plato y la Bebida</h1>
+      <p class="text-wood-muted small">Explora la matriz de 4x4 y descubre los elementos ocultos de la casa.</p>
+    </div>
+
+    <!-- mensaje estado -->
+    <div class="alert alert-custom mb-4 py-3 shadow-sm">
+      <i class="bi bi-info-circle-fill text-wood-amber me-2"></i>
+      <span class="fw-semibold">{{ mensaje }}</span>
+    </div>
+
+    <!-- matriz -->
+    <div class="matriz-grid shadow-lg p-3 bg-dark-card border-wood rounded-4 mb-4">
+      <div class="grid-container">
+        <div *ngFor="let casilla of casillasPlanas" class="grid-item">
+          <div 
+            class="card-casilla rounded-3 overflow-hidden border-wood"
+            [ngClass]="{'encontrada': casilla.encontrada}"
+            (click)="seleccionarCasilla(casilla)">
+            
+            <!-- oculto -->
+            <div *ngIf="!casilla.encontrada" class="w-100 h-100 d-flex align-items-center justify-content-center bg-oculto">
+              <i class="bi bi-question-lg text-wood-amber fs-3"></i>
+            </div>
+
+            <!-- revelado (comida o bebida) -->
+            <div *ngIf="casilla.encontrada && casilla.tipo !== 'vacia'" class="w-100 h-100 d-flex flex-column align-items-center justify-content-between bg-revelado p-1">
+              <div class="img-wrapper rounded overflow-hidden flex-grow-1 w-100">
+                <img [src]="casilla.imagen" [alt]="casilla.nombre" class="w-100 h-100 object-fit-cover">
+              </div>
+              <span class="nombre-etiqueta text-white fw-bold text-truncate w-100 mt-1">
+                {{ casilla.nombre }}
+              </span>
+            </div>
+
+            <!-- revelado (vacio) -->
+            <div *ngIf="casilla.encontrada && casilla.tipo === 'vacia'" class="w-100 h-100 d-flex align-items-center justify-content-center bg-vacia text-wood-muted">
+              <i class="bi bi-x-circle fs-4"></i>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- reinicio -->
+    <button class="btn btn-wood-glow px-4 py-2" (click)="iniciarJuego()">
+      <i class="bi bi-arrow-counterclockwise me-2"></i> Reiniciar Matriz
+    </button>
+
+  </div>
+</div>

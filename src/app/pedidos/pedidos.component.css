@@ -1,0 +1,44 @@
+:host {
+  --color-bg-black: #0d0d0d;
+  --color-bg-dark: #161311;
+  --color-border-dark: #2a221c;
+  --color-wood-dark: #3d2414;
+  --color-wood-primary: #8b4513;
+  --color-wood-light: #d4a373;
+  --color-wood-amber: #dda15e;
+  --color-text-muted: #c5bca0;
+  
+  background-color: var(--color-bg-black);
+  color: #e0e0e0;
+  display: block;
+  min-height: 100vh;
+}
+
+.bg-dark-card { background-color: var(--color-bg-dark); }
+.text-wood-light { color: var(--color-wood-light); }
+.text-wood-amber { color: var(--color-wood-amber); }
+.text-wood-muted { color: var(--color-text-muted); }
+.border-wood { border: 1px solid var(--color-border-dark) !important; }
+
+.badge-ingrediente {
+  background-color: rgba(61, 36, 20, 0.4);
+  color: #e2dcd0;
+  border: 1px solid rgba(212, 163, 115, 0.2);
+  font-weight: 400;
+  font-size: 0.7rem;
+  padding: 0.2em 0.5em;
+}
+
+.btn-wood-glow {
+  background: linear-gradient(135deg, var(--color-wood-primary), var(--color-wood-dark));
+  color: #ffffff;
+  border: 1px solid var(--color-wood-amber);
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-wood-glow:hover {
+  background: linear-gradient(135deg, var(--color-wood-light), var(--color-wood-primary));
+  color: #0d0d0d;
+  border-color: var(--color-wood-light);
+}

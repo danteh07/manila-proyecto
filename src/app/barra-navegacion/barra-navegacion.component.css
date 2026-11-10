@@ -1,0 +1,107 @@
+:host {
+  --color-bg-black: #121212;
+  --color-bg-dark: #1a1a1a;
+  --color-border-dark: #2a2a2a;
+  --color-wood-dark: #4a2e1b;
+  --color-wood-primary: #8b4513;
+  --color-wood-light: #c19a6b;
+  --color-wood-sand: #d2b48c;
+  --color-wood-amber: #e6c280;
+  --color-text-muted: #a0a0a0;
+}
+
+.custom-navbar {
+  background-color: var(--color-bg-black) !important;
+  border-bottom: 2px solid var(--color-wood-dark);
+  padding: 0.8rem 1rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+.brand-icon {
+  color: var(--color-wood-light);
+  font-size: 1.4rem;
+}
+
+.brand-text {
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #ffffff;
+  font-size: 1.25rem;
+}
+
+.text-accent {
+  color: var(--color-wood-light);
+}
+
+.custom-navbar .nav-link {
+  color: #e0e0e0;
+  font-weight: 500;
+  font-size: 0.95rem;
+  padding: 0.5rem 1rem !important;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.custom-navbar .nav-link:hover,
+.custom-navbar .nav-link.active {
+  color: var(--color-wood-amber) !important;
+}
+
+.custom-navbar .nav-link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 50%;
+  background-color: var(--color-wood-light);
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+}
+
+.custom-navbar .nav-link:hover::after,
+.custom-navbar .nav-link.active::after {
+  width: 60%;
+}
+
+.btn-wood {
+  background-color: var(--color-wood-primary);
+  color: #ffffff;
+  border: 1px solid var(--color-wood-primary);
+  font-weight: 600;
+  padding: 0.4rem 1.1rem;
+  transition: all 0.3s ease;
+}
+
+.btn-wood:hover {
+  background-color: var(--color-wood-light);
+  border-color: var(--color-wood-light);
+  color: #121212;
+}
+
+.btn-outline-wood {
+  background-color: transparent;
+  color: var(--color-wood-sand);
+  border: 1px solid var(--color-wood-dark);
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.btn-outline-wood:hover {
+  background-color: rgba(139, 69, 19, 0.2);
+  border-color: var(--color-wood-light);
+  color: var(--color-wood-amber);
+}
+
+.badge-wood {
+  background-color: var(--color-wood-primary);
+  color: #ffffff;
+}
+
+.custom-toggler {
+  border-color: var(--color-wood-dark) !important;
+}
+
+.custom-toggler:focus {
+  box-shadow: 0 0 0 0.25rem rgba(193, 154, 107, 0.25);
+}
