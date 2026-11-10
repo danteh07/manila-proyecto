@@ -13,6 +13,8 @@ export class PedidosComponent implements OnInit {
 
   constructor(public compartirDatos: CompartirDatosService) { }
 
+  pedidoConfirmado: boolean = false; // <-- Agrega esta línea
+
   ngOnInit(): void { }
 // obtener
 
