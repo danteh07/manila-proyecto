@@ -10,7 +10,6 @@ export class ApiService {
 
   constructor() { }
 
-  // Función auxiliar para asignar precios aleatorios
   private agregarPrecioAleatorio(items: any[]): any[] {
     if (!items) return [];
     return items.map(item => ({
@@ -19,11 +18,6 @@ export class ApiService {
     }));
   }
 
-  // ==========================================
-  // APIS DE COMIDAS (TheMealDB)
-  // ==========================================
-
-  // Obtener comidas por defecto (por letra 'a' o búsqueda base)
   obtenerComidasIniciales(): Promise<any[]> {
     return fetch(`${this.mealUrl}/search.php?s=`)
       .then(res => res.json())
@@ -34,7 +28,6 @@ export class ApiService {
       });
   }
 
-  // Buscar comida por nombre (ejemplo: search.php?s=Arrabiata)
   buscarComidaPorNombre(nombre: string): Promise<any[]> {
     return fetch(`${this.mealUrl}/search.php?s=${encodeURIComponent(nombre)}`)
       .then(res => res.json())
@@ -45,7 +38,6 @@ export class ApiService {
       });
   }
 
-  // Buscar comida por ingrediente (ejemplo: filter.php?i=chicken_breast)
   buscarComidaPorIngrediente(ingrediente: string): Promise<any[]> {
     return fetch(`${this.mealUrl}/filter.php?i=${encodeURIComponent(ingrediente)}`)
       .then(res => res.json())
@@ -56,11 +48,6 @@ export class ApiService {
       });
   }
 
-  // ==========================================
-  // APIS DE BEBIDAS (TheCocktailDB)
-  // ==========================================
-
-  // Obtener bebidas iniciales
   obtenerBebidasIniciales(): Promise<any[]> {
     return fetch(`${this.cocktailUrl}/search.php?s=a`)
       .then(res => res.json())
@@ -71,7 +58,6 @@ export class ApiService {
       });
   }
 
-  // Buscar bebida por nombre (ejemplo: search.php?s=margarita)
   buscarBebidaPorNombre(nombre: string): Promise<any[]> {
     return fetch(`${this.cocktailUrl}/search.php?s=${encodeURIComponent(nombre)}`)
       .then(res => res.json())
@@ -82,7 +68,6 @@ export class ApiService {
       });
   }
 
-  // Buscar bebida por ingrediente (ejemplo: filter.php?i=vodka)
   buscarBebidaPorIngrediente(ingrediente: string): Promise<any[]> {
     return fetch(`${this.cocktailUrl}/filter.php?i=${encodeURIComponent(ingrediente)}`)
       .then(res => res.json())
@@ -93,7 +78,6 @@ export class ApiService {
       });
   }
 
-  // Filtrar bebida por tipo alcohólica (filter.php?a=Alcoholic)
   obtenerBebidasAlcoholicas(): Promise<any[]> {
     return fetch(`${this.cocktailUrl}/filter.php?a=Alcoholic`)
       .then(res => res.json())
@@ -104,7 +88,6 @@ export class ApiService {
       });
   }
 
-  // Filtrar bebida sin alcohol (filter.php?a=Non_Alcoholic)
   obtenerBebidasSinAlcohol(): Promise<any[]> {
     return fetch(`${this.cocktailUrl}/filter.php?a=Non_Alcoholic`)
       .then(res => res.json())
@@ -115,7 +98,6 @@ export class ApiService {
       });
   }
 
-  // Filtrar por categoría bebida ordinaria (filter.php?c=Ordinary_Drink)
   obtenerBebidasOrdinarias(): Promise<any[]> {
     return fetch(`${this.cocktailUrl}/filter.php?c=Ordinary_Drink`)
       .then(res => res.json())
@@ -126,7 +108,6 @@ export class ApiService {
       });
   }
 
-  // Filtrar por categoría cóctel (filter.php?c=Cocktail)
   obtenerBebidasCoctel(): Promise<any[]> {
     return fetch(`${this.cocktailUrl}/filter.php?c=Cocktail`)
       .then(res => res.json())
