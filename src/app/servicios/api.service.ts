@@ -18,6 +18,42 @@ export class ApiService {
     }));
   }
 
+  // Método auxiliar para obtener el detalle completo por ID cuando el filtro es resumido
+  private async completarDetallesComidas(items: any[]): Promise<any[]> {
+    if (!items || items.length === 0) return [];
+    
+    // Consultamos el detalle completo (lookup) para cada plato obtenido
+    const promesasDetalle = items.map(async (item) => {
+      try {
+        const res = await fetch(`${this.mealUrl}/lookup.php?i=${item.idMeal}`);
+        const data = await res.json();
+        return data.meals ? data.meals[0] : item;
+      } catch (e) {
+        return item; // Si falla uno, devolvemos el original
+      }
+    });
+
+    const comidasCompletas = await Promise.all(promesasDetalle);
+    return this.agregarPrecioAleatorio(comidasCompletas);
+  }
+
+  private async completarDetallesBebidas(items: any[]): Promise<any[]> {
+    if (!items || items.length === 0) return [];
+    
+    const promesasDetalle = items.map(async (item) => {
+      try {
+        const res = await fetch(`${this.cocktailUrl}/lookup.php?i=${item.idDrink}`);
+        const data = await res.json();
+        return data.drinks ? data.drinks[0] : item;
+      } catch (e) {
+        return item;
+      }
+    });
+
+    const bebidasCompletas = await Promise.all(promesasDetalle);
+    return this.agregarPrecioAleatorio(bebidasCompletas);
+  }
+
   obtenerComidasIniciales(): Promise<any[]> {
     return fetch(`${this.mealUrl}/search.php?s=`)
       .then(res => res.json())
@@ -38,10 +74,11 @@ export class ApiService {
       });
   }
 
+  // Ahora usa el completador de detalles para traer los ingredientes
   buscarComidaPorIngrediente(ingrediente: string): Promise<any[]> {
     return fetch(`${this.mealUrl}/filter.php?i=${encodeURIComponent(ingrediente)}`)
       .then(res => res.json())
-      .then(data => this.agregarPrecioAleatorio(data.meals))
+      .then(data => this.completarDetallesComidas(data.meals))
       .catch(err => {
         console.error('Error al buscar comida por ingrediente:', err);
         return [];
@@ -71,7 +108,7 @@ export class ApiService {
   buscarBebidaPorIngrediente(ingrediente: string): Promise<any[]> {
     return fetch(`${this.cocktailUrl}/filter.php?i=${encodeURIComponent(ingrediente)}`)
       .then(res => res.json())
-      .then(data => this.agregarPrecioAleatorio(data.drinks))
+      .then(data => this.completarDetallesBebidas(data.drinks))
       .catch(err => {
         console.error('Error al buscar bebida por ingrediente:', err);
         return [];
@@ -81,7 +118,7 @@ export class ApiService {
   obtenerBebidasAlcoholicas(): Promise<any[]> {
     return fetch(`${this.cocktailUrl}/filter.php?a=Alcoholic`)
       .then(res => res.json())
-      .then(data => this.agregarPrecioAleatorio(data.drinks))
+      .then(data => this.completarDetallesBebidas(data.drinks))
       .catch(err => {
         console.error('Error al obtener bebidas alcohólicas:', err);
         return [];
@@ -91,7 +128,7 @@ export class ApiService {
   obtenerBebidasSinAlcohol(): Promise<any[]> {
     return fetch(`${this.cocktailUrl}/filter.php?a=Non_Alcoholic`)
       .then(res => res.json())
-      .then(data => this.agregarPrecioAleatorio(data.drinks))
+      .then(data => this.completarDetallesBebidas(data.drinks))
       .catch(err => {
         console.error('Error al obtener bebidas sin alcohol:', err);
         return [];
@@ -101,7 +138,7 @@ export class ApiService {
   obtenerBebidasOrdinarias(): Promise<any[]> {
     return fetch(`${this.cocktailUrl}/filter.php?c=Ordinary_Drink`)
       .then(res => res.json())
-      .then(data => this.agregarPrecioAleatorio(data.drinks))
+      .then(data => this.completarDetallesBebidas(data.drinks))
       .catch(err => {
         console.error('Error al obtener bebidas ordinarias:', err);
         return [];
@@ -111,7 +148,7 @@ export class ApiService {
   obtenerBebidasCoctel(): Promise<any[]> {
     return fetch(`${this.cocktailUrl}/filter.php?c=Cocktail`)
       .then(res => res.json())
-      .then(data => this.agregarPrecioAleatorio(data.drinks))
+      .then(data => this.completarDetallesBebidas(data.drinks))
       .catch(err => {
         console.error('Error al obtener cócteles:', err);
         return [];
